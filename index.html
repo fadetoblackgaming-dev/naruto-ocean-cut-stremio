@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naruto Ocean Cut - Stremio Addon</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .subtitle {
+            text-align: center;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        .install-section {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+        .manifest-url {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            word-break: break-all;
+            margin: 20px 0;
+            font-size: 0.9em;
+        }
+        .btn {
+            display: inline-block;
+            background: #ff6b6b;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin: 10px 5px;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .btn-secondary {
+            background: #4ecdc4;
+        }
+        .features {
+            margin: 30px 0;
+        }
+        .features ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .features li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+        .features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            color: #4ecdc4;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 30px 0;
+            text-align: center;
+        }
+        .stat {
+            flex: 1;
+        }
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #4ecdc4;
+        }
+        .stat-label {
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+        .button-group {
+            text-align: center;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🍥 Naruto Ocean Cut</h1>
+        <div class="subtitle">Stremio Addon - Filler-Free Experience</div>
+        
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-number">95</div>
+                <div class="stat-label">Episodes</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">0</div>
+                <div class="stat-label">Filler</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">20</div>
+                <div class="stat-label">Seasons</div>
+            </div>
+        </div>
+
+        <div class="install-section">
+            <h2 style="margin-bottom: 15px;">📥 Installation</h2>
+            <p style="margin-bottom: 15px;">Copy this manifest URL and paste it in Stremio's addon section:</p>
+            <div class="manifest-url" id="manifestUrl">
+                Loading URL...
+            </div>
+            <div class="button-group">
+                <a href="#" class="btn" id="installBtn" target="_blank">Install in Stremio</a>
+                <button class="btn btn-secondary" onclick="copyManifest()">Copy URL</button>
+            </div>
+        </div>
+
+        <div class="features">
+            <h2 style="margin-bottom: 15px;">✨ Features</h2>
+            <ul>
+                <li>No filler episodes - streamlined story</li>
+                <li>English dub audio</li>
+                <li>Condensed episodes (50min - 2hrs each)</li>
+                <li>Improved pacing matching the manga</li>
+                <li>Flashbacks and recaps removed</li>
+                <li>All major arcs included</li>
+            </ul>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px; opacity: 0.7; font-size: 0.9em;">
+            <p>Fan project based on darkj6's Ocean Cut</p>
+            <p style="margin-top: 10px;">Not affiliated with Naruto or official rights holders</p>
+        </div>
+    </div>
+
+    <script>
+        // Get the current URL and construct manifest URL
+        const manifestUrl = window.location.origin + '/manifest.json';
+        document.getElementById('manifestUrl').textContent = manifestUrl;
+        
+        // Create Stremio install link
+        const stremioUrl = `stremio://${window.location.host}/manifest.json`;
+        document.getElementById('installBtn').href = stremioUrl;
+
+        function copyManifest() {
+            navigator.clipboard.writeText(manifestUrl).then(() => {
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = '✓ Copied!';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

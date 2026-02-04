@@ -1,0 +1,29 @@
+[build]
+  # No build command needed - this is a static site with JSON files
+  publish = "."
+  
+[build.environment]
+  NODE_VERSION = "18"
+
+[[headers]]
+  # Apply CORS headers to all JSON files for Stremio to access them
+  for = "/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type"
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  # Special cache control for manifest
+  for = "/manifest.json"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Cache-Control = "public, max-age=300"
+
+[[redirects]]
+  # Ensure clean URLs work
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = false
