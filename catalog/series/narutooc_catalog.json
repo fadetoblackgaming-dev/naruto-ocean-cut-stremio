@@ -1,0 +1,17 @@
+{
+  "metas": [
+    {
+      "type": "series",
+      "id": "narutooc",
+      "name": "Naruto Ocean Cut",
+      "poster": "https://i.imgur.com/hPBW2mU.png",
+      "genres": [
+        "Animation",
+        "Action",
+        "Adventure",
+        "Fantasy"
+      ],
+      "description": "Naruto Ocean Cut is a fan-edited version of the original Naruto anime series that removes filler content, excessive flashbacks, and unnecessary padding for a streamlined viewing experience."
+    }
+  ]
+}
