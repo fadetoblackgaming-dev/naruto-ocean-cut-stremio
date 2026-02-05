@@ -197,7 +197,7 @@ const manifest = {
   version: '1.0.0',
   name: 'Naruto Ocean Cut',
   description: 'Fan-edited version of Naruto (2002) with no filler, streamlined pacing, and improved flow. English dub.',
-  logo: 'https://i.imgur.com/hPBW2mU.png',
+  logo: 'https://i.imgur.com/JprF6ks.png',
   resources: [
     'catalog',
     {
@@ -235,7 +235,7 @@ const catalog = {
       type: 'series',
       id: 'narutooc',
       name: 'Naruto Ocean Cut',
-      poster: 'https://i.imgur.com/hPBW2mU.png',
+      poster: 'https://i.imgur.com/JprF6ks.png',
       genres: ['Animation', 'Action', 'Adventure', 'Fantasy'],
       description: 'Naruto Ocean Cut is a fan-edited version of the original Naruto anime series that removes filler content, excessive flashbacks, and unnecessary padding for a streamlined viewing experience.'
     }
@@ -263,8 +263,8 @@ const meta = {
     id: 'narutooc',
     type: 'series',
     name: 'Naruto Ocean Cut',
-    poster: 'https://i.imgur.com/hPBW2mU.png',
-    background: 'https://i.imgur.com/YJ8k5Ku.png',
+    poster: 'https://i.imgur.com/JprF6ks.png',
+    background: 'https://i.imgur.com/JprF6ks.png',
     genres: ['Animation', 'Action', 'Adventure', 'Fantasy'],
     description: 'Naruto Ocean Cut is a fan-edited version of the original Naruto anime series that removes filler content, excessive flashbacks, and unnecessary padding for a streamlined viewing experience. Features English dub audio with re-edited pacing to match the manga.',
     videos
