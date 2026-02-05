@@ -1,8 +1,13 @@
 {
   "streams": [
     {
-      "infoHash": "e0c38ede05e555d337e7d534f4eaaebc773bf913",
-      "fileIdx": 102
+      "infoHash": "E0C38EDE05E555D337E7D534F4EAAEBC773BF913",
+      "fileIdx": 102,
+      "title": "🌊 Ocean Cut\n📦 Torrent",
+      "sources": [
+        "tracker:udp://tracker.opentrackr.org:1337/announce",
+        "dht:E0C38EDE05E555D337E7D534F4EAAEBC773BF913"
+      ]
     }
   ]
 }

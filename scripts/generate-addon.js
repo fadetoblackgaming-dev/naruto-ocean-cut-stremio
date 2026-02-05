@@ -2,8 +2,37 @@ const fs = require('fs');
 const path = require('path');
 
 // Torrent info
-const TORRENT_HASH = 'e0c38ede05e555d337e7d534f4eaaebc773bf913';
+const TORRENT_HASH = 'E0C38EDE05E555D337E7D534F4EAAEBC773BF913'; // Uppercase for better compatibility
 const UPLOAD_DATE = '2022-04-13T00:00:00.000Z';
+
+// Episode to season mapping based on episode numbers
+function getSeasonForEpisode(episodeNum, isEpilogue = false, isSpecial = false) {
+  if (isSpecial) return 0; // All specials go to Season 0
+  if (isEpilogue) return 20; // Epilogue episodes go to Season 20
+  
+  // Regular episode mapping
+  if (episodeNum >= 1 && episodeNum <= 5) return 1;    // Land of Waves
+  if (episodeNum >= 6 && episodeNum <= 17) return 2;   // Chunin Exams
+  if (episodeNum >= 18 && episodeNum <= 21) return 3;  // Search for Hope
+  if (episodeNum >= 22 && episodeNum <= 28) return 4;  // Retrieval Mission
+  if (episodeNum >= 29 && episodeNum <= 34) return 5;  // Kazekage Rescue
+  if (episodeNum >= 35 && episodeNum <= 38) return 6;  // Tenchi Bridge Investigation
+  if (episodeNum >= 39 && episodeNum <= 43) return 7;  // Akatsuki Suppression
+  if (episodeNum >= 44 && episodeNum <= 47) return 8;  // Hunt for the Traitor
+  if (episodeNum >= 48 && episodeNum <= 49) return 9;  // Jiraiya the Gallant
+  if (episodeNum >= 50 && episodeNum <= 51) return 10; // Unleashed (OPTIONAL)
+  if (episodeNum >= 52 && episodeNum <= 56) return 11; // Pain
+  if (episodeNum >= 57 && episodeNum <= 62) return 12; // Kage Summit
+  if (episodeNum >= 63 && episodeNum <= 65) return 13; // Island of Purification
+  if (episodeNum >= 66 && episodeNum <= 72) return 14; // The War
+  if (episodeNum >= 73 && episodeNum <= 74) return 15; // Naruto's Counterattack
+  if (episodeNum >= 75 && episodeNum <= 79) return 16; // Worst Case Scenario
+  if (episodeNum >= 80 && episodeNum <= 86) return 17; // Hell
+  if (episodeNum >= 87 && episodeNum <= 88) return 18; // Realm of Infinity
+  if (episodeNum >= 89 && episodeNum <= 91) return 19; // Finale
+  
+  return 0; // Default to Season 0 for anything else
+}
 
 // File list from the torrent (in order as they appear)
 const fileList = [
@@ -127,22 +156,18 @@ function parseEpisode(filePath, fileIndex) {
   let episodeNum = match[1];
   let title = match[2].trim();
   
+  // Detect episode type
+  const isEpilogue = filePath.includes('Epilogue');
+  const isSpecial = filePath.includes('SPECIAL #') || filePath.includes('Kakashi\'s Story');
+  
   // Handle special episodes
   if (episodeNum.startsWith('#')) {
     episodeNum = episodeNum.substring(1);
   }
 
-  // Determine season from path
-  const seasonMatch = filePath.match(/Season (\d+)/);
-  let season = seasonMatch ? parseInt(seasonMatch[1]) : 0;
+  // Determine season using the mapping function
+  const season = getSeasonForEpisode(parseInt(episodeNum), isEpilogue, isSpecial);
   
-  // Special handling for epilogue and specials
-  if (filePath.includes('Epilogue')) {
-    season = 19;
-  } else if (filePath.includes('Kakashi\'s Story')) {
-    season = 0; // Specials
-  }
-
   const id = `naruto_${season}_${episodeNum}`;
 
   return {
@@ -263,7 +288,12 @@ episodes.forEach(ep => {
     streams: [
       {
         infoHash: TORRENT_HASH,
-        fileIdx: ep.fileIndex
+        fileIdx: ep.fileIndex,
+        title: `🌊 Ocean Cut\n📦 Torrent`,
+        sources: [
+          'tracker:udp://tracker.opentrackr.org:1337/announce',
+          'dht:' + TORRENT_HASH
+        ]
       }
     ]
   };
